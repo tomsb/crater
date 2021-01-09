@@ -100,7 +100,7 @@
             @endforeach
         @endif
 
-        @if ($invoice->discount_per_item === 'NO')
+        @if ($invoice->discount_per_item === 'NO' && $invoice->discount_val != 0)
             <tr>
                 <td class="border-0 total-table-attribute-label">
                     @if($invoice->discount_type === 'fixed')
