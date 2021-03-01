@@ -7,6 +7,9 @@
         @if($invoice->discount_per_item === 'YES')
         <th class="pl-10 text-right item-table-heading">@lang('pdf_discount_label')</th>
         @endif
+        @if($invoice->tax_per_item === 'YES')
+            <th class="pl-10 text-right item-table-heading">PVN</th>
+        @endif
         <th class="text-right item-table-heading">@lang('pdf_amount_label')</th>
     </tr>
     @php
@@ -53,7 +56,15 @@
                         @endif
                 </td>
             @endif
-
+            @if($invoice->tax_per_item === 'YES')
+                <td
+                    class="pl-10 text-right item-cell"
+                    style="vertical-align: top;  white-space: nowrap;"
+                >
+                    {{ $item->taxes->first()->percent }}%
+                    ({!! format_money_pdf($item->taxes->first()->amount, $invoice->user->currency) !!})
+                </td>
+            @endif
             <td
                 class="text-right item-cell"
                 style="vertical-align: top;"

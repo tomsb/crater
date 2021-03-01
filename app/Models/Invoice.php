@@ -485,7 +485,7 @@ class Invoice extends Model implements HasMedia
             foreach ($this->items as $item) {
                 foreach ($item->taxes as $tax) {
                     if (!in_array($tax->name, $taxTypes)) {
-                        array_push($taxTypes, $tax->name);
+                        array_push($taxTypes, $tax->id);
                         array_push($labels, $tax->name . ' (' . $tax->percent . '%)');
                     }
                 }
@@ -496,7 +496,7 @@ class Invoice extends Model implements HasMedia
 
                 foreach ($this->items as $item) {
                     foreach ($item->taxes as $tax) {
-                        if ($tax->name == $taxType) {
+                        if ($tax->id == $taxType) {
                             $total += $tax->amount;
                         }
                     }
